@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
 
+weights = [0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2,0.5, 0.2]
 
 def BASE(request):
     return render(request, 'base.html')
@@ -113,32 +114,41 @@ def QUIZ(request):
 
     # weight = QuesModel.get_all_questions(QuesModel)
     if request.method == 'POST':
+        achi = "Not achieved"
         print(request.POST)
         questions=QuesModel.objects.all()
         score=0
         wrong=0
         correct=0
         total=0
-        for q in questions:
+        for i,q in enumerate(questions):
             total+=1
             print(request.POST.get(q.question))
             print(q.ans)
             print()
             if q.ans == request.POST.get(q.question):
-                score+=10
+                score+=weights[i]
                 correct+=1
+                print(score)
 
             else:
                 wrong+=1
 
         percent = score/(total*10) *100
+        if score < 0.49 :
+            achi = "Not Achieved"
+        elif 0.5 <= score < 0.69:
+            achi = "Moderatley Achieved"
+        elif 0.69 <= score <= 1:
+            achi = "Achieved"
         context = {
-            'score':score,
+            'score':"{:.2f}".format(score),
             'time': request.POST.get('timer'),
             'correct':correct,
             'wrong':wrong,
             'percent':percent,
-            'total':total
+            'total':total,
+            'achi':achi
         }
         return render(request,'quiz/result.html',context)
     else:
