@@ -97,30 +97,6 @@ class Quiz(models.Model):
     def __str__(self):
         return self.name + " - " + self.course.title
 
-#     def get_absolute_url(self):
-#         from django.urls import reverse
-#         return reverse("quiz", kwargs={'slug': self.slug})
-#
-#
-# def create_slug(instance, new_slug=None):
-#     slug = slugify(instance.name )
-#     if new_slug is not None:
-#         slug = new_slug
-#     qs = Quiz.objects.filter(slug=slug).order_by('-id')
-#     exists = qs.exists()
-#     if exists:
-#         new_slug = "%s-%s" % (slug, qs.first().id)
-#         return create_slug(instance, new_slug=new_slug)
-#     return slug
-#
-#
-# def pre_save_post_receiver(sender, instance, *args, **kwargs):
-#     if not instance.slug:
-#         instance.slug = create_slug(instance)
-#
-#
-# pre_save.connect(pre_save_post_receiver, Quiz)
-
 
 class What_you_learn(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -167,6 +143,20 @@ class QuesModel(models.Model):
 
     def __str__(self):
         return self.question
+
+    def get_descendants(self):
+        descendants = []
+        stack = [self]
+
+        while stack:
+            current = stack.pop()
+
+            children = QuesModel.objects.filter(learnout=current)
+
+            descendants.extend(children)
+            stack.extend(children)
+
+        return descendants
 
 
 class Video(models.Model):

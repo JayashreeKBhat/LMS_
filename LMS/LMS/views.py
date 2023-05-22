@@ -131,9 +131,6 @@ def QUIZ(request):
             else:
                 wrong+=1
 
-        # weight = weight.get_all_questions(QuesModel)
-
-
         percent = score/(total*10) *100
         context = {
             'score':score,
@@ -150,7 +147,42 @@ def QUIZ(request):
             'questions': questions
         }
         return render(request,'quiz/quiz.html',context)
+def mark(entity):
+    # Custom logic to determine the marking condition
+    # Modify this function according to your requirements
 
+    # Example: Check if the entity's course title contains "Physics"
+    # Return True if it does, False otherwise
+    if entity.course.title.lower().find("Python") != -1:
+        return True
+    else:
+        return False
+
+def getAchLevels(e):
+    e.ach = 0  # Initialize achievement level for the current node
+    if not isinstance(e, QuesModel):  # If e is not an assessment tool
+        e.ach = 0
+
+    for d in e.get_descendants():
+        if mark(e) != mark(d):
+            getAchLevels(d)
+        e.ach += d.ach * e.weight
+
+    return e.ach
+
+def calculate_achievement(request):
+    roots = QuesModel.objects.filter(
+        learnout__isnull=True)  # Assuming you want to calculate achievement for root competencies
+
+    for root in roots:
+        getAchLevels(root)
+
+    # You can now access the achievement level of each QuesModel instance
+    for ques in QuesModel.objects.all():
+        print(f"Question: {ques.question}, Achievement Level: {ques.ach}")
+
+    # Render your view or return an HttpResponse
+    return render(request, 'result.html', {'ques_list': QuesModel.objects.all()})
 
 
 def PAGE_NOT_FOUND(request):
