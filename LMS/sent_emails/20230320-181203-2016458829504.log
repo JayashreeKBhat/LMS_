@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: jayashreek1604@yahoo.com
+Date: Mon, 20 Mar 2023 12:42:03 -0000
+Message-ID: <167931612315.5652.15390057666333473527@LAPTOP-J16AH1J8>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/NA/bldh83-420a96f4ffa1b2312f5bb32c6c8cdbcd/
+
+Your username, in case you’ve forgotten: Jayashree K
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
