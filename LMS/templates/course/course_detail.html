@@ -181,17 +181,6 @@
                                     </div>
 
                                     <div class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
-
-
-
-                                        <a href="{% url 'quiz' %}">
-                                        <div class="badge text-dark-70 bg-orange-40 me-5 font-size-sm fw-normal py-2">
-                                            Quiz</div>
-                                        </a>
-
-
-
-
                                         <div class="badge btn-blue-soft me-5 font-size-sm fw-normal py-2">{{video.time_duration}} min</div>
                                         <a href="#" class="text-secondary d-flex">
                                             <!-- Icon -->
@@ -208,6 +197,18 @@
                         {% endfor %}
                     </div>
                 </div>
+
+
+
+                <div id="Quiz" class="mb-8">
+
+
+                    <a href="{% url 'quiz' %}">
+                                        <div class="badge text-dark-70 bg-orange-40 me-5 font-size-sm fw-normal py-2">
+                                            <strong>Quiz</strong></div>
+                                        </a>
+                </div>
+
 
                 <div id="Instructor" class="mb-8">
                     <ul class="nav course-tab-v1 border-bottom h4 mb-8">

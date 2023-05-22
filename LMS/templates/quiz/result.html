@@ -21,7 +21,8 @@
                             <p class="card-text"><strong>Achievement:</strong></p>
 <!--                        </div>-->
 <!--                        <div class="col-sm">-->
-                            <p class="card-text"><strong>CO: Python flow control = 6.5</strong></p>
+                <div>
+                    <p class="card-text"><strong>CO: Python flow control = 6.5</strong></p>
                             <p class="card-text">LO: Basics of flow control = 1</p>
                             <p class="card-text">LO: Control structures in python = 1</p>
                             <p class="card-text">LO: If statements = 1</p>
@@ -43,15 +44,17 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
+                </div>
+
 
                 <ul>
-        {% for ques in ques_list %}
-        <li>
-            <h3>{{ ques.question }}</h3>
-            <p>Achievement Level: {{ ques.ach }}</p>
-        </li>
-        {% endfor %}
-    </ul>
+                    {% for ques in ques_list %}
+                    <li>
+                        <h3>{{ ques.question }}</h3>
+                        <p>Achievement Level: {{ ques.ach }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
                 <h5>All the best for next quiz!</h5>
             </div>
         </div>
