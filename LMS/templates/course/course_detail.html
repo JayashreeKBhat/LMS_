@@ -182,14 +182,14 @@
 
                                     <div class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
 
-                                        {% for quiz in course.quiz_set.all %}
 
-                                        <a href="{{quiz.get_absolute_url}}" class="rounded" data-fancybox>
+
+                                        <a href="{% url 'quiz' %}">
                                         <div class="badge text-dark-70 bg-orange-40 me-5 font-size-sm fw-normal py-2">
-                                            {{quiz.name}}</div>
+                                            Quiz</div>
                                         </a>
 
-                                        {% endfor %}
+
 
 
                                         <div class="badge btn-blue-soft me-5 font-size-sm fw-normal py-2">{{video.time_duration}} min</div>
@@ -255,7 +255,7 @@
 
                         </div>
 
-
+<div>
                         {% if check_enroll is None %}
                         <a class="btn btn-primary btn-block mb-3" href="/checkout/{{course.slug}}">ENROLL</a>
                         {% else %}
@@ -338,6 +338,7 @@
                             </li>
 
                         </ul>
+    </div>
                     </div>
                 </div>
 

@@ -106,44 +106,51 @@ def COURSE_DETAILS(request, slug):
     return render(request, 'course/course_detail.html', context)
 
 
-def QUIZ(request, slug):
-    quiz_id = Quiz.objects.get(slug=slug)
 
+def QUIZ(request):
+    # Quiz.objects.get(slug=slug)
+
+
+    # weight = QuesModel.get_all_questions(QuesModel)
     if request.method == 'POST':
         print(request.POST)
-        questions = QuesModel.objects.all()
-        score = 0
-        wrong = 0
-        correct = 0
-        total = 0
+        questions=QuesModel.objects.all()
+        score=0
+        wrong=0
+        correct=0
+        total=0
         for q in questions:
-            total += 1
-
+            total+=1
             print(request.POST.get(q.question))
             print(q.ans)
             print()
             if q.ans == request.POST.get(q.question):
-                score += 10
-                correct += 1
+                score+=10
+                correct+=1
 
             else:
-                wrong += 1
-        percent = score / (total * 10) * 100
+                wrong+=1
+
+        # weight = weight.get_all_questions(QuesModel)
+
+
+        percent = score/(total*10) *100
         context = {
-            'score': score,
+            'score':score,
             'time': request.POST.get('timer'),
-            'correct': correct,
-            'wrong': wrong,
-            'percent': percent,
-            'total': total
+            'correct':correct,
+            'wrong':wrong,
+            'percent':percent,
+            'total':total
         }
-        return render(request, 'course/result.html', context)
+        return render(request,'quiz/result.html',context)
     else:
-        questions = QuesModel.objects.all()
+        questions=QuesModel.objects.all()
         context = {
             'questions': questions
         }
-        return render(request, 'course/quiz.html', context)
+        return render(request,'quiz/quiz.html',context)
+
 
 
 def PAGE_NOT_FOUND(request):
@@ -179,3 +186,5 @@ def MY_COURSE(request):
 
 def WATCH_COURSE(request, slug):
     return render(request, 'course/watch_course.html')
+
+
